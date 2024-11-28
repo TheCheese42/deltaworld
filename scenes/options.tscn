@@ -1,0 +1,300 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxu6qt6euudb6"]
+
+[ext_resource type="Texture2D" uid="uid://cqiry4am1bp58" path="res://assets/textures/menus/settings.png" id="1_c2u1v"]
+[ext_resource type="Script" uid="uid://bafksnqpa070e" path="res://scripts/options.gd" id="1_e6vpq"]
+[ext_resource type="LabelSettings" uid="uid://dvi2kkqgklcmp" path="res://styles/label/content_12.tres" id="2_yjkok"]
+[ext_resource type="LabelSettings" uid="uid://boddcneu0s146" path="res://styles/label/content_6.tres" id="3_1sggn"]
+[ext_resource type="LabelSettings" uid="uid://hyqd53jibfqb" path="res://styles/label/content_8.tres" id="3_kv8mn"]
+[ext_resource type="LabelSettings" uid="uid://bvvsv5g7d6vj6" path="res://styles/label/content_10.tres" id="4_e6vpq"]
+[ext_resource type="PackedScene" uid="uid://cmcchaufhdlu0" path="res://scenes/selection_arrows.tscn" id="7_o7i7e"]
+
+[node name="Options" type="CanvasLayer" groups=["options"]]
+layer = 5
+script = ExtResource("1_e6vpq")
+
+[node name="SelectionArrows" parent="." instance=ExtResource("7_o7i7e")]
+z_index = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." groups=["main_menu"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(146, 220)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_c2u1v")
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="OptionsEntries" type="VBoxContainer" parent="CenterContainer/TextureRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="OptionsHeader" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OPTIONS"
+label_settings = ExtResource("2_yjkok")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LanguageLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LANGUAGE"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="LanguageDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "NATIVE_LANGUAGE_NAME"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VolumeLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "VOLUME"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="VolumeDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "100"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="Control3" type="Control" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ControlsHeader" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CONTROLS"
+label_settings = ExtResource("4_e6vpq")
+horizontal_alignment = 1
+
+[node name="MoveUpBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "move_up"
+
+[node name="MoveUpLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveUpBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MOVE_UP"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveUpDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveUpBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "W"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveDownBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "move_down"
+
+[node name="MoveDownLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveDownBox"]
+layout_mode = 2
+text = "MOVE_DOWN"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveDownDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveDownBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "S"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveLeftBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "move_left"
+
+[node name="MoveLeftLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveLeftBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MOVE_LEFT"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveLeftDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveLeftBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "A"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveRightBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "move_right"
+
+[node name="MoveRightLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveRightBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MOVE_RIGHT"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="MoveRightDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/MoveRightBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "D"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootUpBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "shoot_up"
+
+[node name="ShootUpLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootUpBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SHOOT_UP"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootUpDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootUpBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "UP"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootDownBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "shoot_down"
+
+[node name="ShootDownLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootDownBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SHOOT_DOWN"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootDownDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootDownBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DOWN"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootLeftBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "shoot_left"
+
+[node name="ShootLeftLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootLeftBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SHOOT_LEFT"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootLeftDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootLeftBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LEFT"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootRightBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "shoot_right"
+
+[node name="ShootRightLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootRightBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SHOOT_RIGHT"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="ShootRightDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/ShootRightBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RIGHT"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="UseItemBox" type="HBoxContainer" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/control_name = "use_item"
+
+[node name="UseItemLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/UseItemBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "USE_ITEM"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="UseItemDisplay" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries/UseItemBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Space"
+label_settings = ExtResource("3_1sggn")
+horizontal_alignment = 1
+
+[node name="Control4" type="Control" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="BackLabel" type="Label" parent="CenterContainer/TextureRect/MarginContainer/OptionsEntries"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BACK"
+label_settings = ExtResource("3_kv8mn")
+horizontal_alignment = 1

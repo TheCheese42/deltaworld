@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c0f6mwgq4u2xg"
-path="res://.godot/imported/novem___.ttf-1b2d34ba982f3db6e30c3895a7a8d866.fontdata"
+uid="uid://cs2i3thtncb4g"
+path="res://.godot/imported/novem___.ttf-4c7fbc3bd2aee9e95872af8b0d599e66.fontdata"
 
 [deps]
 
-source_file="res://assets/november/novem___.ttf"
-dest_files=["res://.godot/imported/novem___.ttf-1b2d34ba982f3db6e30c3895a7a8d866.fontdata"]
+source_file="res://assets/fonts/november/novem___.ttf"
+dest_files=["res://.godot/imported/novem___.ttf-4c7fbc3bd2aee9e95872af8b0d599e66.fontdata"]
 
 [params]
 
