@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1gs7qlw4fac4"]
+
+[ext_resource type="Texture2D" uid="uid://bsf4prdkr1urr" path="res://assets/textures/menus/achievements.png" id="1_uhxyi"]
+[ext_resource type="Texture2D" uid="uid://di4rqj2cdgjds" path="res://assets/textures/achievement_lawyer.png" id="2_wf1mw"]
+[ext_resource type="Texture2D" uid="uid://cj4kqwswit7ax" path="res://assets/textures/achievement_poor_spectre.png" id="3_gq3ih"]
+[ext_resource type="Texture2D" uid="uid://ov6xtnc14wbt" path="res://assets/textures/achievement_not_bug_feature.png" id="4_jnbt2"]
+[ext_resource type="Texture2D" uid="uid://6e0ut8d044bl" path="res://assets/textures/achievement_unique_playstyle.png" id="5_svwer"]
+
+[node name="Achievements" type="CanvasLayer"]
+
+[node name="Menu" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -45.0
+offset_right = 90.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uhxyi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+offset_right = 212.0
+offset_bottom = 50.0
+scale = Vector2(0.75, 0.75)
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Menu/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_wf1mw")
+
+[node name="TextureRect2" type="TextureRect" parent="Menu/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_gq3ih")
+
+[node name="TextureRect3" type="TextureRect" parent="Menu/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_jnbt2")
+
+[node name="TextureRect4" type="TextureRect" parent="Menu/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_svwer")
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Bottom Text"
