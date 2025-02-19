@@ -19,5 +19,9 @@ func _init() -> void:
 	"shoot_right": InputMap.action_get_events("shoot_right")[0],
 	"use_item": InputMap.action_get_events("use_item")[0],
 }
+@export var achievement_lawyer: bool = false
+@export var achievement_not_bug_feature: bool = false
+@export var achievement_poor_spectre: bool = false
+@export var achievement_unique_playstyle: bool = false
 
 var version: Array = JSON.parse_string(FileAccess.get_file_as_string("res://version.json"))

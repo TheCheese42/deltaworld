@@ -12,6 +12,7 @@ var _ordered_labels: Array[Label]
 var _main_menu_disabled: bool = false
 
 var _options_scene: PackedScene = load("res://scenes/options.tscn")
+var _achievements_scene: PackedScene = load("res://scenes/achievements.tscn")
 
 func _ready() -> void:
 	GlobalFunctions.apply_options()
@@ -51,6 +52,9 @@ func _input(event: InputEvent) -> void:
 		_selection_arrows.set_target(_selected_entry)
 	elif event.is_action_pressed("select"):
 		_dispatch_entry_action(_selected_entry)
+	elif event.is_action_pressed("achievements"):
+		_open_achievements()
+		_main_menu_disabled = true
 
 func _dispatch_entry_action(entry: Label) -> void:
 	if entry == _start_game_label:
@@ -79,3 +83,7 @@ func _open_options() -> void:
 
 func set_main_menu_enabled(enabled: bool = true) -> void:
 	_main_menu_disabled = not enabled
+
+func _open_achievements() -> void:
+	var achievements_instance: CanvasLayer = _achievements_scene.instantiate()
+	self.add_child(achievements_instance)
