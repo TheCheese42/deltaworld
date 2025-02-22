@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://doi2umjyydvl7"]
+
+[ext_resource type="Script" uid="uid://dj2j0rmx4imu" path="res://scripts/hostiles/zombie.gd" id="1_7073v"]
+[ext_resource type="Texture2D" uid="uid://rx7b5hhcuuh7" path="res://assets/textures/hostiles/zombie/zombie_back_1.png" id="1_jb71q"]
+[ext_resource type="Texture2D" uid="uid://c2cv7spryym1c" path="res://assets/textures/hostiles/zombie/zombie_back_2.png" id="2_2io8j"]
+[ext_resource type="Texture2D" uid="uid://8ydhfm84bd77" path="res://assets/textures/hostiles/zombie/zombie_front_1.png" id="3_5bpfa"]
+[ext_resource type="Texture2D" uid="uid://c0stgnii1gwmx" path="res://assets/textures/hostiles/zombie/zombie_front_2.png" id="4_kh57n"]
+[ext_resource type="Texture2D" uid="uid://dr38ydo6kpbod" path="res://assets/textures/hostiles/zombie/zombie_side_1.png" id="5_seqa1"]
+[ext_resource type="Texture2D" uid="uid://cf6a77d1rv2i4" path="res://assets/textures/hostiles/zombie/zombie_side_2.png" id="6_7073v"]
+[ext_resource type="Texture2D" uid="uid://dypnlbhug3jmu" path="res://assets/textures/hostiles/giant/giant_front_1.png" id="7_seqa1"]
+[ext_resource type="Texture2D" uid="uid://cp3d0rxpyhtl1" path="res://assets/textures/hostiles/giant/giant_front_2.png" id="8_7073v"]
+[ext_resource type="Texture2D" uid="uid://cyuemox4mijtb" path="res://assets/textures/hostiles/giant/giant_front_3.png" id="9_r3r46"]
+[ext_resource type="Texture2D" uid="uid://dxs2k1ysa6sxa" path="res://assets/textures/hostiles/giant/giant_front_4.png" id="10_jqs7o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r3r46"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jb71q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2io8j")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5bpfa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kh57n")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_seqa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7073v")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61hlp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_seqa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7073v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r3r46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jqs7o")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}]
+
+[node name="Hostiles" type="Node2D"]
+
+[node name="Zombie" type="RigidBody2D" parent="."]
+lock_rotation = true
+script = ExtResource("1_7073v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Zombie"]
+sprite_frames = SubResource("SpriteFrames_r3r46")
+animation = &"front"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zombie"]
+polygon = PackedVector2Array(5, 8, 9, 5, 9, 1, 7, -5, 5, -7, -4, -7, -6, -5, -8, 1, -8, 5, -4, 8)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Zombie"]
+path_max_distance = 10.0
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Giant" type="Area2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Giant"]
+sprite_frames = SubResource("SpriteFrames_61hlp")
+animation = &"front"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Giant"]
+polygon = PackedVector2Array(5, -9, 7, -7, 7, -2, 9, -2, 11, 0, 11, 6, 10, 7, 7, 7, 7, 9, 6, 10, -5, 10, -6, 9, -6, 7, -9, 7, -10, 6, -10, 0, -8, -2, -6, -2, -6, -7, -4, -9)

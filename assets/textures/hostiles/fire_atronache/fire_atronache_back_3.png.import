@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsgyfrc7pb62a"
-path="res://.godot/imported/zombie_default.png-52bd7fe2499b3741a32e4e6af68747fb.ctex"
+uid="uid://d3umjrffvthf"
+path="res://.godot/imported/fire_atronache_back_3.png-1b54925c6bd5da1ddce697ac89cf8356.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/hostiles/zombie/zombie_default.png"
-dest_files=["res://.godot/imported/zombie_default.png-52bd7fe2499b3741a32e4e6af68747fb.ctex"]
+source_file="res://assets/textures/hostiles/fire_atronache/fire_atronache_back_3.png"
+dest_files=["res://.godot/imported/fire_atronache_back_3.png-1b54925c6bd5da1ddce697ac89cf8356.ctex"]
 
 [params]
 
