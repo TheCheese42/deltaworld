@@ -79,12 +79,17 @@ sprite_frames = SubResource("SpriteFrames_r3r46")
 animation = &"front"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zombie"]
-polygon = PackedVector2Array(5, 8, 9, 5, 9, 1, 7, -5, 5, -7, -4, -7, -6, -5, -8, 1, -8, 5, -4, 8)
+polygon = PackedVector2Array(6, 8, 6, -6, -5, -6, -5, 8)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Zombie"]
+target_desired_distance = 0.1
 path_max_distance = 10.0
 avoidance_enabled = true
-debug_enabled = true
+max_neighbors = 50
+
+[node name="Timer" type="Timer" parent="Zombie"]
+wait_time = 0.1
+autostart = true
 
 [node name="Giant" type="Area2D" parent="."]
 visible = false
@@ -94,4 +99,6 @@ sprite_frames = SubResource("SpriteFrames_61hlp")
 animation = &"front"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Giant"]
-polygon = PackedVector2Array(5, -9, 7, -7, 7, -2, 9, -2, 11, 0, 11, 6, 10, 7, 7, 7, 7, 9, 6, 10, -5, 10, -6, 9, -6, 7, -9, 7, -10, 6, -10, 0, -8, -2, -6, -2, -6, -7, -4, -9)
+polygon = PackedVector2Array(8, -7, 8, 9, -7, 9, -7, -7)
+
+[connection signal="timeout" from="Zombie/Timer" to="Zombie" method="_on_timer_timeout"]

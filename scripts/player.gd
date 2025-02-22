@@ -10,15 +10,39 @@ var bullet_speed: int = 120
 
 func _process(delta: float) -> void:
 	# Movement
-	velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_down"):
-		velocity.y += player_speed
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= player_speed
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= player_speed
-	if Input.is_action_pressed("move_right"):
-		velocity.x += player_speed
+	var move_x: int = 0
+	var move_y: int = 0
+	if time_since_last_shot >= shoot_cooldown:
+		if Input.is_action_pressed("move_down"):
+			move_y += 1
+		if Input.is_action_pressed("move_up"):
+			move_y -= 1
+		if Input.is_action_pressed("move_left"):
+			move_x -= 1
+		if Input.is_action_pressed("move_right"):
+			move_x += 1
+		if move_x or move_y:
+			var move_angle: int
+			if move_x < 0 and move_y < 0:
+				move_angle = 315
+			elif move_x < 0 and move_y > 0:
+				move_angle = 225
+			elif move_x > 0 and move_y < 0:
+				move_angle = 45
+			elif move_x > 0 and move_y > 0:
+				move_angle = 135
+			elif move_x > 0:
+				move_angle = 90
+			elif move_x < 0:
+				move_angle = 270
+			elif move_y < 0:
+				move_angle = 0
+			else:
+				move_angle = 180
+			move_angle -= 90  # 0 is to the right
+			velocity = GlobalFunctions.calc_velocity(player_speed, move_angle)
+		else:
+			velocity = Vector2.ZERO
 	@warning_ignore("return_value_discarded")
 	move_and_slide()
 

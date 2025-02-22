@@ -4,7 +4,10 @@ class_name Zombie
 @export var movement_speed: float = 30.0
 @onready var navigation_agent: NavigationAgent2D = get_node("NavigationAgent2D")
 var movement_delta: float
+var player_node: Node2D
 
+func init(player: Node2D) -> void:
+	player_node = player
 
 func _ready() -> void:
 	@warning_ignore("return_value_discarded")
@@ -35,3 +38,6 @@ func _process(_delta: float) -> void:
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	#global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 	linear_velocity = safe_velocity
+
+func _on_timer_timeout() -> void:
+	set_movement_target(player_node.global_position)
