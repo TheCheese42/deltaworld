@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://doi2umjyydvl7"]
+[gd_scene load_steps=15 format=3 uid="uid://doi2umjyydvl7"]
 
 [ext_resource type="Script" uid="uid://dj2j0rmx4imu" path="res://scripts/hostiles/zombie.gd" id="1_7073v"]
 [ext_resource type="Texture2D" uid="uid://rx7b5hhcuuh7" path="res://assets/textures/hostiles/zombie/zombie_back_1.png" id="1_jb71q"]
@@ -48,6 +48,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7073v"]
+radius = 3.0
+height = 10.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_61hlp"]
 animations = [{
 "frames": [{
@@ -77,15 +81,23 @@ script = ExtResource("1_7073v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Zombie"]
 sprite_frames = SubResource("SpriteFrames_r3r46")
 animation = &"front"
+offset = Vector2(-0.5, -0.5)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zombie"]
-polygon = PackedVector2Array(6, 8, 6, -6, -5, -6, -5, 8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie"]
+position = Vector2(0, 4.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7073v")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Zombie"]
-target_desired_distance = 0.1
-path_max_distance = 10.0
-avoidance_enabled = true
+path_desired_distance = 0.5
+navigation_layers = 2
+path_postprocessing = 2
+simplify_path = true
+simplify_epsilon = 1.0
+neighbor_distance = 100.0
 max_neighbors = 50
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="Timer" type="Timer" parent="Zombie"]
 wait_time = 0.1

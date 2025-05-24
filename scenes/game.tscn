@@ -25,6 +25,7 @@ position = Vector2(240, 135)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_iywne")
+navigation_layers = 3
 script = ExtResource("4_iywne")
 
 [node name="Maps" type="Node2D" parent="."]
