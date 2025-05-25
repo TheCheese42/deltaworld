@@ -10,6 +10,7 @@ var current_wave: int = 0
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+
 func _init(level: String) -> void:
 	var level_file: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://levels/" + level + ".json"))
 	mob_probabilities = level_file["mob_probabilities"]

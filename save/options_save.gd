@@ -24,4 +24,7 @@ func _init() -> void:
 @export var achievement_poor_spectre: bool = false
 @export var achievement_unique_playstyle: bool = false
 
+@export var window_mode: DisplayServer.WindowMode = DisplayServer.WINDOW_MODE_FULLSCREEN
+@export var window_size: Vector2 = Vector2(480, 270)
+
 var version: Array = JSON.parse_string(FileAccess.get_file_as_string("res://version.json"))

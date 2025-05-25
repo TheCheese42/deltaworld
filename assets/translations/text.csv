@@ -20,7 +20,10 @@ BACK,Back,Zuruck,
 KEY_PICKER,Press any Key to rebind,Drucke eine Taste zum Belegen,
 ACHIEVEMENTS,Achievements,Errungenschaften,
 ACHIEVEMENT_LAWYER,Lawyer,Anwalt,
-ACHIEVEMENT_NOT_BUG_FEATURE,It's not a Bug, it's a Feature,"Es ist kein Fehler, es ist eine Funktion",
+ACHIEVEMENT_NOT_BUG_FEATURE,"It's not a Bug, it's a Feature","Es ist kein Fehler, es ist eine Funktion",
 ACHIEVEMENT_POOR_SPECTRE,Poor Spectre,Armes Gespenst,
 ACHIEVEMENT_UNIQUE_PLAYSTYLE,Unique Playstyle,Einzigartiger Spielstil,
 QUESTION_MARKS,???,???,???
+ROOM_DISPLAY,"Dimension: %s\nRoom: %s","Dimension: %s\nRoom: %s",
+DELTAWORLD,Deltaworld,Deltaworld,Deltaworld
+BOSS,Boss,Boss,

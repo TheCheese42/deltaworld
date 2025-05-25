@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://doi2umjyydvl7"]
+[gd_scene load_steps=16 format=3 uid="uid://doi2umjyydvl7"]
 
 [ext_resource type="Script" uid="uid://dj2j0rmx4imu" path="res://scripts/hostiles/zombie.gd" id="1_7073v"]
 [ext_resource type="Texture2D" uid="uid://rx7b5hhcuuh7" path="res://assets/textures/hostiles/zombie/zombie_back_1.png" id="1_jb71q"]
@@ -52,6 +52,10 @@ animations = [{
 radius = 3.0
 height = 10.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3r46"]
+radius = 7.0
+height = 14.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_61hlp"]
 animations = [{
 "frames": [{
@@ -75,8 +79,12 @@ animations = [{
 [node name="Hostiles" type="Node2D"]
 
 [node name="Zombie" type="RigidBody2D" parent="."]
+collision_layer = 3
+collision_mask = 2
 lock_rotation = true
 script = ExtResource("1_7073v")
+base_speed = 0.5
+metadata/_custom_type_script = "uid://biatn38xk85f5"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Zombie"]
 sprite_frames = SubResource("SpriteFrames_r3r46")
@@ -96,12 +104,17 @@ simplify_path = true
 simplify_epsilon = 1.0
 neighbor_distance = 100.0
 max_neighbors = 50
-debug_enabled = true
-debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="Timer" type="Timer" parent="Zombie"]
 wait_time = 0.1
 autostart = true
+
+[node name="DamageHitbox" type="Area2D" parent="Zombie"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie/DamageHitbox"]
+shape = SubResource("CapsuleShape2D_r3r46")
 
 [node name="Giant" type="Area2D" parent="."]
 visible = false

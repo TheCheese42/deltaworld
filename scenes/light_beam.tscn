@@ -1,0 +1,77 @@
+[gd_scene load_steps=16 format=3 uid="uid://d4e86y6usj74h"]
+
+[ext_resource type="Texture2D" uid="uid://cyrmi8kyvvh01" path="res://assets/textures/misc/light_beam/light_beam_8.png" id="1_kiobo"]
+[ext_resource type="Script" uid="uid://jvb4oq86enwh" path="res://scripts/light_beam.gd" id="1_u02c0"]
+[ext_resource type="Texture2D" uid="uid://3xdq7r7fmq1g" path="res://assets/textures/misc/light_beam/light_beam_9.png" id="2_u02c0"]
+[ext_resource type="Texture2D" uid="uid://c265rukjvwkbn" path="res://assets/textures/misc/light_beam/light_beam_10.png" id="3_tnqbg"]
+[ext_resource type="Texture2D" uid="uid://bf1cxbi1geq8g" path="res://assets/textures/misc/light_beam/light_beam_11.png" id="4_gqe75"]
+[ext_resource type="Texture2D" uid="uid://cm7rjtc08ojuk" path="res://assets/textures/misc/light_beam/light_beam_12.png" id="5_cup4i"]
+[ext_resource type="Texture2D" uid="uid://dlruhmbwoe8u1" path="res://assets/textures/misc/light_beam/light_beam_13.png" id="6_i3lwl"]
+[ext_resource type="Texture2D" uid="uid://j5ta8ycbn6wp" path="res://assets/textures/misc/light_beam/light_beam_1.png" id="7_papay"]
+[ext_resource type="Texture2D" uid="uid://cfh8r4pp7iiqp" path="res://assets/textures/misc/light_beam/light_beam_2.png" id="8_s6dvh"]
+[ext_resource type="Texture2D" uid="uid://dlmu5q4cxctyf" path="res://assets/textures/misc/light_beam/light_beam_3.png" id="9_kiife"]
+[ext_resource type="Texture2D" uid="uid://20d8lhj6jtjq" path="res://assets/textures/misc/light_beam/light_beam_4.png" id="10_n5tbo"]
+[ext_resource type="Texture2D" uid="uid://bygx6egi0s3s4" path="res://assets/textures/misc/light_beam/light_beam_5.png" id="11_yws48"]
+[ext_resource type="Texture2D" uid="uid://cci3w5vrhv1rx" path="res://assets/textures/misc/light_beam/light_beam_6.png" id="12_001si"]
+[ext_resource type="Texture2D" uid="uid://cxe51dhf712eo" path="res://assets/textures/misc/light_beam/light_beam_7.png" id="13_d3cvv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tnqbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kiobo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_u02c0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tnqbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gqe75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cup4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i3lwl")
+}],
+"loop": false,
+"name": &"beam",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_papay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_s6dvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kiife")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_n5tbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_yws48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_001si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_d3cvv")
+}],
+"loop": false,
+"name": &"setup",
+"speed": 15.0
+}]
+
+[node name="LightBeam" type="Node2D"]
+script = ExtResource("1_u02c0")
+
+[node name="Beam" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -488)
+sprite_frames = SubResource("SpriteFrames_tnqbg")
+animation = &"setup"

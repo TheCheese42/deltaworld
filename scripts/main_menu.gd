@@ -13,10 +13,12 @@ var _main_menu_disabled: bool = false
 
 var _options_scene: PackedScene = load("res://scenes/options.tscn")
 var _achievements_scene: PackedScene = load("res://scenes/achievements.tscn")
+var _fade_scene: PackedScene = load("res://scenes/fade.tscn")
+
 
 func _ready() -> void:
 	GlobalFunctions.apply_options()
-	_selection_arrows = $ColorRect/SelectionArrows
+	_selection_arrows = find_child("SelectionArrows")
 	_start_game_label = find_child("StartGameLabel")
 	_load_game_label = find_child("LoadGameLabel")
 	_options_label = find_child("OptionsLabel")
@@ -72,7 +74,12 @@ func _quit() -> void:
 	get_tree().quit(0)
 
 func _start_game() -> void:
-	pass
+	var fade_instance: Fade = _fade_scene.instantiate()
+	fade_instance.duration = 0.5
+	add_child(fade_instance)
+	await fade_instance.half_reached
+	@warning_ignore("return_value_discarded")
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func _load_game() -> void:
 	pass

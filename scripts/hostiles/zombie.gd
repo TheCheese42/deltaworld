@@ -1,15 +1,14 @@
-extends RigidBody2D
+extends Hostile
 class_name Zombie
 
-@export var movement_speed: float = 30.0
 @onready var navigation_agent: NavigationAgent2D = get_node("NavigationAgent2D")
 var movement_delta: float
-var player_node: Node2D
 
-func init(player: Node2D) -> void:
-	player_node = player
 
 func _ready() -> void:
+	init_stats()
+
+	set_movement_target(player_node.global_position)
 	@warning_ignore("return_value_discarded")
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
@@ -23,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	if navigation_agent.is_navigation_finished():
 		return
 
-	movement_delta = movement_speed * delta
+	movement_delta = final_velocity() * delta
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	var new_velocity: Vector2 = global_position.direction_to(next_path_position) * movement_delta
 	if navigation_agent.avoidance_enabled:
@@ -36,7 +35,6 @@ func _process(_delta: float) -> void:
 	move_and_collide(linear_velocity)
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
-	#global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 	linear_velocity = safe_velocity
 
 func _on_timer_timeout() -> void:

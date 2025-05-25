@@ -1,5 +1,6 @@
-[gd_resource type="TileSet" load_steps=67 format=3 uid="uid://b1fl8ygq0ua2g"]
+[gd_resource type="TileSet" load_steps=70 format=3 uid="uid://b1fl8ygq0ua2g"]
 
+[ext_resource type="Texture2D" uid="uid://byd58y7rhdidh" path="res://assets/textures/map/void.png" id="1_pepyp"]
 [ext_resource type="Texture2D" uid="uid://bb4m1df2am4xn" path="res://assets/textures/map/barrel.png" id="1_tciwn"]
 [ext_resource type="Texture2D" uid="uid://ospewgk0qu5c" path="res://assets/textures/map/fire4.png" id="2_pepyp"]
 [ext_resource type="Texture2D" uid="uid://vtqhv4ce6u12" path="res://assets/textures/map/firestone.png" id="3_eg07l"]
@@ -22,6 +23,18 @@
 [ext_resource type="Texture2D" uid="uid://cpj5if4lceycc" path="res://assets/textures/map/fire1.png" id="20_7oicc"]
 [ext_resource type="Texture2D" uid="uid://dnjgbmjiyr0d1" path="res://assets/textures/map/fire2.png" id="21_n53dc"]
 [ext_resource type="Texture2D" uid="uid://bijo52cwhu1ot" path="res://assets/textures/map/fire3.png" id="22_0u3qh"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0u3qh"]
+vertices = PackedVector2Array(1, -1, 15, -1, 15, 1, 1, 1, 1, 15, -1, 15, -1, 1, -1, -1, -15, 1, -15, -1, 1, -15, -1, -15)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 3, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(10, 0, 7, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1, -15, 1, -1, 15, -1, 15, 1, 1, 1, 1, 15, -1, 15, -1, 1, -15, 1, -15, -1, -1, -1, -1, -15)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eg07l"]
+texture = ExtResource("1_pepyp")
+texture_region_size = Vector2i(30, 30)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0u3qh")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tciwn"]
 
@@ -262,17 +275,17 @@ texture_region_size = Vector2i(30, 30)
 0:1/0 = 0
 1:1/0 = 0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_0u3qh"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kqutf"]
 vertices = PackedVector2Array(1, -1, 15, -1, 15, 1, 1, 1, 1, 15, -1, 15, -1, 1, -1, -1, -15, 1, -15, -1, 1, -15, -1, -15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 3, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(10, 0, 7, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-15, -1, -1, -1, -1, -15, 1, -15, 1, -1, 15, -1, 15, 1, 1, 1, 1, 15, -1, 15, -1, 1, -15, 1)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1, -15, 1, -1, 15, -1, 15, 1, 1, 1, 1, 15, -1, 15, -1, 1, -15, 1, -15, -1, -1, -1, -1, -15)])
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bnuda"]
 texture = ExtResource("19_o8uu4")
 texture_region_size = Vector2i(30, 30)
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0u3qh")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_kqutf")
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
@@ -315,7 +328,7 @@ texture_region_size = Vector2i(30, 30)
 
 [resource]
 tile_size = Vector2i(30, 30)
-physics_layer_0/collision_layer = 3
+physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_0sl42")
@@ -340,3 +353,4 @@ sources/19 = SubResource("TileSetAtlasSource_3hbvx")
 sources/20 = SubResource("TileSetAtlasSource_ms3bu")
 sources/21 = SubResource("TileSetAtlasSource_7ixpq")
 sources/22 = SubResource("TileSetAtlasSource_bk1p3")
+sources/0 = SubResource("TileSetAtlasSource_eg07l")

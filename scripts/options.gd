@@ -77,6 +77,7 @@ func _dispatch_entry_action(entry: Control, type: String) -> void:
 			if new_index >= len(langs):
 				new_index = 0
 			TranslationServer.set_locale(langs[new_index])
+		GlobalVars.options_save.language = TranslationServer.get_locale()
 	elif entry == find_child("VolumeDisplay"):
 		var add: int = 2
 		if Input.is_key_pressed(KEY_SHIFT):

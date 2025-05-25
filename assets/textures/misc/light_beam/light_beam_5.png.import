@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx5pxwg7edpd3"
-path="res://.godot/imported/black.png-4904c04479e5cf7a11e4a73b1a0c79b9.ctex"
+uid="uid://bygx6egi0s3s4"
+path="res://.godot/imported/light_beam_5.png-70d0db9f455680c8d1cf61e3c74761cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/misc/black.png"
-dest_files=["res://.godot/imported/black.png-4904c04479e5cf7a11e4a73b1a0c79b9.ctex"]
+source_file="res://assets/textures/misc/light_beam/light_beam_5.png"
+dest_files=["res://.godot/imported/light_beam_5.png-70d0db9f455680c8d1cf61e3c74761cf.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://no2nmn0xgmu0"]
+[gd_scene load_steps=8 format=4 uid="uid://no2nmn0xgmu0"]
 
 [ext_resource type="Script" uid="uid://cl0r6tor6r662" path="res://scripts/game.gd" id="1_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://bx5pxwg7edpd3" path="res://assets/textures/misc/black.png" id="2_e1j6l"]
@@ -6,15 +6,55 @@
 [ext_resource type="TileSet" uid="uid://b1fl8ygq0ua2g" path="res://resources/tileset_main.tres" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://12873ai6i2ui" path="res://scripts/navigation_region_2d.gd" id="4_iywne"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_iywne"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_iywne"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RoomDisplay" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_right = 48.0
+offset_bottom = 35.0
+grow_horizontal = 2
+size_flags_vertical = 0
+text = "Dimension: 1
+Room: 1"
+label_settings = SubResource("LabelSettings_iywne")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(240, 135)
-scale = Vector2(480, 270)
+scale = Vector2(10000, 5624.99)
 texture = ExtResource("2_e1j6l")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(240, 135)
+
+[node name="TopLeft" type="Marker2D" parent="."]
+position = Vector2(120, 15)
+
+[node name="BottomRight" type="Marker2D" parent="."]
+position = Vector2(360, 255)
 
 [node name="Center" type="Marker2D" parent="."]
 position = Vector2(240, 135)
@@ -22,6 +62,20 @@ position = Vector2(240, 135)
 [node name="Player" parent="." instance=ExtResource("3_lbhrr")]
 z_index = 1
 position = Vector2(240, 135)
+
+[node name="SpawnVoid" type="TileMapLayer" parent="."]
+z_index = 2
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAoAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAAYAAoAAAAAAAAAAAARABEAAAAAAAAAAAAQABEAAAAAAAAAAAAPABEAAAAAAAAAAAAOABEAAAAAAAAAAAA=")
+tile_set = ExtResource("3_lnu2h")
+collision_enabled = false
+
+[node name="Void" type="TileMapLayer" parent="."]
+z_index = 2
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAoAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAAYAAoAAAAAAAAAAAARABEAAAAAAAAAAAAQABEAAAAAAAAAAAAPABEAAAAAAAAAAAAOABEAAAAAAAAAAAAHAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAGAAkAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAsAAAAAAAAAAAANABEAAAAAAAAAAAANABIAAAAAAAAAAAAOABIAAAAAAAAAAAAPABIAAAAAAAAAAAAQABIAAAAAAAAAAAARABIAAAAAAAAAAAASABIAAAAAAAAAAAASABEAAAAAAAAAAAAGAAsAAAAAAAAAAAAGAAYAAAAAAAAAAAAYAAsAAAAAAAAAAAAZAAsAAAAAAAAAAAAZAAoAAAAAAAAAAAAZAAkAAAAAAAAAAAAZAAgAAAAAAAAAAAAZAAcAAAAAAAAAAAAZAAYAAAAAAAAAAAAYAAYAAAAAAAAAAAASAAAAAAAAAAAAAAASAP//AAAAAAAAAAARAP//AAAAAAAAAAAQAP//AAAAAAAAAAAPAP//AAAAAAAAAAAOAP//AAAAAAAAAAANAP//AAAAAAAAAAANAAAAAAAAAAAAAAA=")
+tile_set = ExtResource("3_lnu2h")
+collision_enabled = false
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_iywne")
@@ -303,3 +357,5 @@ tile_set = ExtResource("3_lnu2h")
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAIAAEAEgAAAAAAAAAIAAIAEgAAAAAAAAAIAAMAEgAAAAAAAAAIAAQAEgAAAAAAAAAIAAUAEgAAAAAAAAAIAAYAEgAAAAAAAAAIAAcABgAAAAAAAAAIAAgABgAAAAAAAAAIAAkABgAAAAAAAAAIAAoABgAAAAAAAAAJAAEAEgAAAAAAAAAKAAEAEgAAAAAAAAALAAEAEgAAAAAAAAAMAAEAEgAAAAAAAAANAAEAEgAAAAAAAAAOAAEAEgAAAAAAAAAQAAEAEgAAAAAAAAARAAEAEgAAAAAAAAASAAEAEgAAAAAAAAASABAAEgAAAAAAAAATAAEAEgAAAAAAAAATABAAEgAAAAAAAAAUAAEAEgAAAAAAAAAUABAAEgAAAAAAAAAVAAEAEgAAAAAAAAAVABAAEgAAAAAAAAAWAAEAEgAAAAAAAAAWABAAEgAAAAAAAAAXAAEAEgAAAAAAAAAXAAIAEgAAAAAAAAAXAAMAEgAAAAAAAAAXAAQAEgAAAAAAAAAXAAUAEgAAAAAAAAAXAAYAEgAAAAAAAAAXAAcAEgAAAAAAAAAXAAgAEgAAAAAAAAAXAAkAEgAAAAAAAAAXAAoAEgAAAAAAAAAXAAsAEgAAAAAAAAAXAAwAEgAAAAAAAAAXAA0AEgAAAAAAAAAXAA4AEgAAAAAAAAAXAA8AEgAAAAAAAAAXABAAEgAAAAAAAAAIAAsAEgAAAAAAAAAIAAwAEgAAAAAAAAAIAA0AEgAAAAAAAAAIAA4AEgAAAAAAAAAIABAAEgAAAAAAAAAJABAAEgAAAAAAAAAKABAAEgAAAAAAAAALABAAEgAAAAAAAAAMABAAEgAAAAAAAAANABAAEgAAAAAAAAAIAA8AEgAAAAAAAAAPAAEAEgAAAAAAAAAOABAAEgAAAAAAAAAPABAAEgAAAAAAAAAQABAAEgAAAAAAAAARABAAEgAAAAAAAAA=")
 tile_set = ExtResource("3_lnu2h")
+
+[node name="Mobs" type="Node2D" parent="."]

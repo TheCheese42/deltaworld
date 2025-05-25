@@ -1,5 +1,14 @@
 extends Node
 
+func _ready() -> void:
+	DisplayServer.window_set_size(GlobalVars.options_save.window_size)
+	DisplayServer.window_set_mode(GlobalVars.options_save.window_mode)
+	@warning_ignore("return_value_discarded")
+	get_tree().get_root().size_changed.connect(_resize)
+	apply_options()
+	await get_tree().create_timer(0.0).timeout
+	get_tree().get_root().move_to_center()
+
 func load_options() -> OptionsSave:
 	var options: OptionsSave
 	if not FileAccess.file_exists("user://saves/options.tres"):
@@ -34,5 +43,12 @@ func _input(_event: InputEvent) -> void:
 		var mode: DisplayServer.WindowMode = DisplayServer.window_get_mode()
 		if mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			DisplayServer.window_set_size(GlobalVars.options_save.window_size)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		GlobalVars.options_save.window_mode = DisplayServer.window_get_mode()
+		save_options()
+
+func _resize() -> void:
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+		GlobalVars.options_save.window_size = DisplayServer.window_get_size()
