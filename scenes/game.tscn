@@ -1,18 +1,44 @@
-[gd_scene load_steps=8 format=4 uid="uid://no2nmn0xgmu0"]
+[gd_scene load_steps=24 format=4 uid="uid://no2nmn0xgmu0"]
 
 [ext_resource type="Script" uid="uid://cl0r6tor6r662" path="res://scripts/game.gd" id="1_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://bx5pxwg7edpd3" path="res://assets/textures/misc/black.png" id="2_e1j6l"]
 [ext_resource type="PackedScene" uid="uid://b68qfjckt6kd5" path="res://scenes/player.tscn" id="3_lbhrr"]
 [ext_resource type="TileSet" uid="uid://b1fl8ygq0ua2g" path="res://resources/tileset_main.tres" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://12873ai6i2ui" path="res://scripts/navigation_region_2d.gd" id="4_iywne"]
+[ext_resource type="Texture2D" uid="uid://bfjkoj02tfdj5" path="res://assets/textures/items/frame.png" id="4_rysoc"]
+[ext_resource type="PackedScene" uid="uid://fww0dubjb28n" path="res://scenes/dropped_item.tscn" id="6_ca42v"]
+[ext_resource type="Texture2D" uid="uid://e545pup1rxaw" path="res://assets/textures/items/semi_automatic.png" id="7_rysoc"]
+[ext_resource type="Texture2D" uid="uid://tibwaf7qmtwp" path="res://assets/textures/items/scope.png" id="8_ssvqc"]
+[ext_resource type="Texture2D" uid="uid://bemsnu3gpb1ot" path="res://assets/textures/items/blue_cow.png" id="9_264po"]
+[ext_resource type="Texture2D" uid="uid://c3vx67d8fbshs" path="res://assets/textures/items/spray.png" id="10_1kice"]
+[ext_resource type="Texture2D" uid="uid://b3k6cyirtcuy8" path="res://assets/textures/items/three_sixty.png" id="11_5newe"]
+[ext_resource type="Texture2D" uid="uid://did1u4v16pw1u" path="res://assets/textures/items/pressurer.png" id="12_37s47"]
+[ext_resource type="Texture2D" uid="uid://ciepltvjmq4kf" path="res://assets/textures/items/holy_guard.png" id="13_bt5mj"]
+[ext_resource type="Texture2D" uid="uid://bo6f4j7xh7078" path="res://assets/textures/items/smoke_bomb.png" id="14_e1j6l"]
+[ext_resource type="Texture2D" uid="uid://s4e0dpj6drf5" path="res://assets/textures/items/laser_beam.png" id="15_pl11u"]
+[ext_resource type="Texture2D" uid="uid://dym5gag7o41ey" path="res://assets/textures/items/res_coin.png" id="16_bhx41"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_iywne"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssvqc"]
+texture = ExtResource("4_rysoc")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rysoc"]
+texture = ExtResource("16_bhx41")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ca42v"]
+sources/0 = SubResource("TileSetAtlasSource_ssvqc")
+sources/1 = SubResource("TileSetAtlasSource_rysoc")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ssvqc"]
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_iywne"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["game"]]
 script = ExtResource("1_lnu2h")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -62,6 +88,26 @@ position = Vector2(240, 135)
 [node name="Player" parent="." instance=ExtResource("3_lbhrr")]
 z_index = 1
 position = Vector2(240, 135)
+
+[node name="Misc" type="Node2D" parent="."]
+
+[node name="ItemFrame" type="TileMapLayer" parent="Misc"]
+position = Vector2(1, 1)
+tile_map_data = PackedByteArray("AAAXAAEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ca42v")
+
+[node name="ResCoin" type="TileMapLayer" parent="Misc"]
+position = Vector2(1, -6)
+tile_map_data = PackedByteArray("AAAXAAMAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_ca42v")
+
+[node name="ResCoinLabel" type="Label" parent="Misc/ResCoin"]
+offset_left = 384.0
+offset_top = 48.0
+offset_right = 424.0
+offset_bottom = 64.0
+text = "x2"
+label_settings = SubResource("LabelSettings_ssvqc")
 
 [node name="SpawnVoid" type="TileMapLayer" parent="."]
 z_index = 2
@@ -359,3 +405,68 @@ tile_map_data = PackedByteArray("AAAIAAEAEgAAAAAAAAAIAAIAEgAAAAAAAAAIAAMAEgAAAAA
 tile_set = ExtResource("3_lnu2h")
 
 [node name="Mobs" type="Node2D" parent="."]
+
+[node name="Drops" type="Node2D" parent="Mobs"]
+visible = false
+
+[node name="SemiAutomatic" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"cooldown": 0.1
+})
+duration = 12.0
+texture = ExtResource("7_rysoc")
+
+[node name="Scope" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"firing_rate_multiplier": 0.8,
+"penetration_offset": 1.0
+})
+duration = 8.0
+texture = ExtResource("8_ssvqc")
+
+[node name="BlueCow" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"movement_speed_multiplier": 1.35
+})
+duration = 15.0
+texture = ExtResource("9_264po")
+
+[node name="Spray" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+duration = 13.0
+texture = ExtResource("10_1kice")
+
+[node name="ThreeSixty" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+duration = 12.0
+texture = ExtResource("11_5newe")
+
+[node name="Pressurer" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"bullet_speed_multiplier": 1.5,
+"damage_multiplier": 2.0
+})
+duration = 12.0
+texture = ExtResource("12_37s47")
+
+[node name="HolyGuard" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"invincibility_duration": 3.0
+})
+duration = 8.0
+texture = ExtResource("13_bt5mj")
+
+[node name="SmokeBomb" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+duration = 7.0
+texture = ExtResource("14_e1j6l")
+
+[node name="LaserBeam" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"cycle_duration": 1.5
+})
+duration = 15.0
+texture = ExtResource("15_pl11u")
+
+[node name="ResurrectionCoin" parent="Mobs/Drops" instance=ExtResource("6_ca42v")]
+stats = Dictionary[String, float]({
+"resurrection_coin": 1.0
+})
+texture = ExtResource("16_bhx41")

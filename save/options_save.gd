@@ -23,6 +23,8 @@ func _init() -> void:
 @export var achievement_not_bug_feature: bool = false
 @export var achievement_poor_spectre: bool = false
 @export var achievement_unique_playstyle: bool = false
+@export var game_completed: bool = false
+@export var game_completed_hard: bool = false
 
 @export var window_mode: DisplayServer.WindowMode = DisplayServer.WINDOW_MODE_FULLSCREEN
 @export var window_size: Vector2 = Vector2(480, 270)

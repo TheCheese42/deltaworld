@@ -13,6 +13,8 @@ var room_done: bool = false
 @onready var bottom_right: Marker2D = $BottomRight
 @onready var room_display: Label = $CanvasLayer/Control/RoomDisplay
 @onready var mobs: Node2D = $Mobs
+@onready var item_frame: TileMapLayer = $Misc/ItemFrame
+@onready var res_coin_label: Label = $Misc/ResCoin/ResCoinLabel
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -95,7 +97,7 @@ func _init_map() -> void:
 	navigation_region_2d.init_nav_region()
 
 func _post_room() -> void:
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	if current_room in [2, 4]:
 		_setup_shop()
 	else:
@@ -106,6 +108,7 @@ func _setup_shop() -> void:
 	_beam_to_next_room()
 
 func _beam_to_next_room() -> void:
+	await get_tree().create_timer(1.5).timeout
 	player.frozen = true
 	var beam_instance: LightBeam = _beam_scene.instantiate()
 	add_child(beam_instance)
@@ -129,5 +132,11 @@ func _beam_to_next_room() -> void:
 	_new_room()
 
 func _mobs_changed() -> void:
-	if room_done and len(mobs.get_children()) == 0:
+	if room_done and len(mobs.get_children()) == 1:  # 1 Because of items
 		_post_room()
+
+func store_item(item: DroppedItem) -> void:
+	item.position = item_frame.map_to_local(item_frame.get_used_cells()[0]) + Vector2(1, 1)
+
+func update_res_coins_label(count: int) -> void:
+	pass

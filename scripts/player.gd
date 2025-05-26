@@ -11,6 +11,10 @@ var bullet_penetration: int = 1
 var bullet_damage: int = 1
 var map_rect: Rect2
 
+var active_items: Array[DroppedItem] = []
+var stored_item: DroppedItem = null
+var resurrection_coins: int = 0
+
 var frozen: bool = true
 
 
@@ -51,7 +55,6 @@ func _process(delta: float) -> void:
 		velocity = GlobalFunctions.calc_velocity(player_speed, move_angle)
 	else:
 		velocity = Vector2.ZERO
-	@warning_ignore("return_value_discarded")
 	move_and_slide()
 
 	# Bullets
@@ -94,3 +97,21 @@ func _process(delta: float) -> void:
 			)
 			get_parent().add_child(bullet)
 			time_since_last_shot = 0.0
+	
+	if Input.is_action_just_pressed("use_item"):
+		if stored_item != null:
+			stored_item.activate()
+			active_items.append(stored_item)
+			stored_item = null
+
+func pickup_item(item: DroppedItem) -> void:
+	if item.stats.has("resurrection_coin"):
+		resurrection_coins += int(item.stats["resurrection_coin"])
+		item.queue_free()
+		return
+	if stored_item == null:
+		stored_item = item
+		get_tree().call_group("game", "store_item", item)
+	else:
+		item.activate()
+		active_items.append(item)
