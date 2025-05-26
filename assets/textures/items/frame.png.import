@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://did1u4v16pw1u"
-path="res://.godot/imported/pressurer.png-85a95c51c06c7ff1b3bf97e2e7bfcdbe.ctex"
+uid="uid://bfjkoj02tfdj5"
+path="res://.godot/imported/frame.png-da23aad6276788582d728e0853f78ec9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/items/pressurer.png"
-dest_files=["res://.godot/imported/pressurer.png-85a95c51c06c7ff1b3bf97e2e7bfcdbe.ctex"]
+source_file="res://assets/textures/items/frame.png"
+dest_files=["res://.godot/imported/frame.png-da23aad6276788582d728e0853f78ec9.ctex"]
 
 [params]
 
