@@ -49,9 +49,11 @@ animation = &"walking"
 polygon = PackedVector2Array(-6, 5, -6, 11, 5, 11, 5, 5)
 
 [node name="DamageHitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 0
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
 position = Vector2(-0.5, 1)
 shape = SubResource("CapsuleShape2D_qlg0r")
+
+[connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]

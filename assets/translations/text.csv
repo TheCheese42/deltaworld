@@ -1,5 +1,5 @@
 keys,en,de,pl
-START_GAME,Start Game,Spiel Starten,Rozpocznij grę
+START_GAME,Play,Spielen,grać
 LOAD_GAME,Load Game,Spiel Laden,
 OPTIONS,Options,Optionen,
 QUIT,Quit,Beenden,
@@ -27,3 +27,4 @@ QUESTION_MARKS,???,???,???
 ROOM_DISPLAY,"Dimension: %s\nRoom: %s","Dimension: %s\nRoom: %s",
 DELTAWORLD,Deltaworld,Deltaworld,Deltaworld
 BOSS,Boss,Boss,
+COINS_DISPLAY,x%d,x%d,x%d

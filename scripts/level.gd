@@ -1,5 +1,4 @@
-@tool
-extends Resource
+extends Node
 class_name Level
 
 var mob_probabilities: Dictionary

@@ -89,6 +89,7 @@ metadata/_custom_type_script = "uid://biatn38xk85f5"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Zombie"]
 sprite_frames = SubResource("SpriteFrames_r3r46")
 animation = &"front"
+autoplay = "front"
 offset = Vector2(-0.5, -0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie"]
@@ -110,7 +111,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="DamageHitbox" type="Area2D" parent="Zombie"]
-collision_layer = 4
+collision_layer = 12
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie/DamageHitbox"]
@@ -122,6 +123,7 @@ visible = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Giant"]
 sprite_frames = SubResource("SpriteFrames_61hlp")
 animation = &"front"
+autoplay = "front"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Giant"]
 polygon = PackedVector2Array(8, -7, 8, 9, -7, 9, -7, -7)

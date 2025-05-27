@@ -27,6 +27,12 @@ func _ready() -> void:
 	_selected_entry = _start_game_label
 	_ordered_labels = [_start_game_label, _load_game_label, _options_label, _quit_label]
 
+	var fade_instance: Fade = _fade_scene.instantiate()
+	fade_instance.skip_to_second_half = true
+	fade_instance.immediately_full_alpha = true
+	fade_instance.duration = 0.5
+	add_child(fade_instance)
+
 func _input(event: InputEvent) -> void:
 	if _main_menu_disabled:
 		return

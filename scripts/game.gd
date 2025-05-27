@@ -15,6 +15,13 @@ var room_done: bool = false
 @onready var mobs: Node2D = $Mobs
 @onready var item_frame: TileMapLayer = $Misc/ItemFrame
 @onready var res_coin_label: Label = $Misc/ResCoin/ResCoinLabel
+@onready var progress_bar: ColorRect = $CanvasLayer/Control2/ProgressBar
+
+var current_level: Level = null
+var current_level_duration: float = 0.0
+var current_level_progress: float = 0.0
+var current_wave: Level.Wave = null
+var current_wave_progress: float = 0.0
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -75,20 +82,44 @@ func _new_room() -> void:
 	await tween.finished
 	player.frozen = false
 
-	var level: Level = Level.new(level_str)
 	await get_tree().create_timer(2.0).timeout
-	for i: int in len(level.waves):
-		var wave: Level.Wave = level.next_wave()
-		for mob_str: String in wave.mobs:
+	current_level = Level.new(level_str)
+	current_level_progress = 0.0
+	current_level_duration = 0.0
+	for wave: Array in current_level.waves:
+		current_level_duration += wave[1]
+
+func _process(delta: float) -> void:
+	if GlobalVars.halted:
+		return
+
+	if not current_level or room_done:
+		progress_bar.visible = false
+		return
+
+	current_wave_progress += delta
+	current_level_progress += delta
+	progress_bar.visible = true
+	progress_bar.color = Color(0.224, 0.698, 0.133).lerp(
+		Color(0.784, 0.078, 0.0), clampf(
+			current_level_progress / current_level_duration - 0.7, 0.0, 1.0
+		)
+	)
+	progress_bar.size.x = lerpf(240.0, 0.0, current_level_progress / current_level_duration)
+
+	if not current_wave or current_wave.duration <= current_wave_progress:
+		current_wave_progress = 0.0
+		if current_level.current_wave >= len(current_level.waves):
+			room_done = true
+			return
+		current_wave = current_level.next_wave()
+		for mob_str: String in current_wave.mobs:
 			var cells: Array[Vector2i] = spawn_void_layer.get_used_cells()
 			var cell: Vector2i = cells[rng.randi_range(0, len(cells) - 1)]
 			var mob: Hostile = _hostile_instance.find_child(mob_str).duplicate()
 			mob.init(player)
 			mobs.add_child(mob)
 			mob.position = spawn_void_layer.map_to_local(cell) / 2
-		if i < len(level.waves) - 1:  # Skip wait for last wave, if available
-			await get_tree().create_timer(wave.duration).timeout
-	room_done = true
 
 func _init_map() -> void:
 	for child: Node2D in navigation_region_2d.get_children():
@@ -139,4 +170,34 @@ func store_item(item: DroppedItem) -> void:
 	item.position = item_frame.map_to_local(item_frame.get_used_cells()[0]) + Vector2(1, 1)
 
 func update_res_coins_label(count: int) -> void:
-	pass
+	res_coin_label.text = tr("COINS_DISPLAY") % count
+
+func kill_all_hostiles() -> void:
+	for node: Node2D in mobs.get_children():
+		if is_instance_of(node, Hostile):
+			node.queue_free()
+	room_done = false
+
+func go_back_rounds(num: int) -> void:
+	current_level.current_wave = current_level.current_wave - (num + 1)
+	if current_level.current_wave < 0:
+		current_level.current_wave = 0
+	current_level_progress = 0.0
+	current_wave_progress = 0.0
+	if current_level.current_wave > 0:
+		current_wave_progress = current_level.waves[current_level.current_wave][1]
+		for wave: Array in current_level.waves.slice(0, current_level.current_wave + 1):
+			current_level_progress += wave[1]
+	else:
+		current_wave = null
+
+func move_player_to_center() -> void:
+	player.global_position = center.global_position
+
+func back_to_menu() -> void:
+	await get_tree().create_timer(1.0).timeout
+	var fade_instance: Fade = _fade_scene.instantiate()
+	fade_instance.duration = 1.5
+	add_child(fade_instance)
+	await fade_instance.half_reached
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
