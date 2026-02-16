@@ -10,9 +10,12 @@ var room_done: bool = false
 @onready var navigation_region_2d: GameNavRegion = $NavigationRegion2D
 @onready var center: Marker2D = $Center
 @onready var top_left: Marker2D = $TopLeft
+@onready var top_left_inner: Marker2D = $TopLeftInner
 @onready var bottom_right: Marker2D = $BottomRight
+@onready var bottom_right_inner: Marker2D = $BottomRightInner
 @onready var room_display: Label = $CanvasLayer/Control/RoomDisplay
 @onready var mobs: Node2D = $Mobs
+@onready var drops: Node2D = $Drops
 @onready var item_frame: TileMapLayer = $Misc/ItemFrame
 @onready var res_coin_label: Label = $Misc/ResCoin/ResCoinLabel
 @onready var progress_bar: ColorRect = $CanvasLayer/Control2/ProgressBar
@@ -201,3 +204,26 @@ func back_to_menu() -> void:
 	add_child(fade_instance)
 	await fade_instance.half_reached
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+func drop_item(drop_name: String, global_pos: Vector2) -> void:
+	var drop: DroppedItem = drops.get_node(drop_name).duplicate()
+	add_child(drop)
+	drop.lying_on_ground = true
+	drop.global_position = global_pos
+	var tween: Tween = create_tween()
+	if drop.global_position.x < top_left_inner.global_position.x:
+		tween.tween_property(drop, "global_position", Vector2(
+			top_left_inner.global_position.x + 8, drop.global_position.y
+		), 0.8)
+	if drop.global_position.y < top_left_inner.global_position.y:
+		tween.tween_property(drop, "global_position", Vector2(
+			drop.global_position.x, top_left_inner.global_position.y + 8, 
+		), 0.8)
+	if drop.global_position.x > bottom_right_inner.global_position.x:
+		tween.tween_property(drop, "global_position", Vector2(
+			bottom_right_inner.global_position.x - 8, drop.global_position.y
+		), 0.8)
+	if drop.global_position.y > bottom_right_inner.global_position.y:
+		tween.tween_property(drop, "global_position", Vector2(
+			drop.global_position.x, bottom_right_inner.global_position.y - 8, 
+		), 0.8)

@@ -168,7 +168,7 @@ func _process(delta: float) -> void:
 			for other_item: DroppedItem in active_items:
 				if not other_item:
 					continue
-				if other_item.name == stored_item.name:
+				if other_item.stats == stored_item.stats:
 					active_items.erase(other_item)
 					other_item.queue_free()
 			stored_item.activate()
@@ -176,19 +176,23 @@ func _process(delta: float) -> void:
 			stored_item = null
 
 func pickup_item(item: DroppedItem) -> void:
+	print("pickup")
 	if item.stats.has("resurrection_coin"):
+		print("res")
 		resurrection_coins += int(item.stats["resurrection_coin"])
 		get_tree().call_group("game", "update_res_coins_label", resurrection_coins)
 		item.queue_free()
 		return
-	if stored_item == null:
+	elif stored_item == null:
+		print("store")
 		stored_item = item
 		get_tree().call_group("game", "store_item", item)
 	else:
+		print("use")
 		for other_item: DroppedItem in active_items:
 			if not other_item:
 				continue
-			if other_item.name == item.name:
+			if other_item.stats == item.stats:
 				active_items.erase(other_item)
 				other_item.queue_free()
 		item.activate()

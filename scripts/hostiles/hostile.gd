@@ -7,7 +7,7 @@ var player_node: Node2D
 var health: int = 1
 @export var base_speed: float = 1.0
 
-@onready var drops: Node2D = get_parent().find_child("Drops")
+@onready var drops: Node2D = $Drops
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var drop_rate: float = 0.1
 @export var drop_table: Dictionary[String, int] = {
@@ -24,9 +24,8 @@ var drop_rate: float = 0.1
 }
 
 
-func random_drop() -> DroppedItem:
-	var item: String = drop_table.keys()[rng.rand_weighted(drop_table.values())]
-	return drops.find_child(item, false, false).duplicate()
+func random_drop() -> String:
+	return drop_table.keys()[rng.rand_weighted(drop_table.values())]
 
 func init(player: Node2D) -> void:
 	player_node = player
@@ -43,8 +42,7 @@ func hit(damage: int) -> void:
 		die()
 
 func die() -> void:
-	queue_free()
 	if rng.randf() < drop_rate:
-		var drop: DroppedItem = random_drop()
-		get_tree().call_group("game", "add_child", drop)
-		drop.global_position = global_position
+		var drop: String = random_drop()
+		get_tree().call_group("game", "drop_item", drop, global_position)
+	queue_free()

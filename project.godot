@@ -8,13 +8,17 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Deltaworld"
 config/description="A 2D Shooter where you have to fight Illuminati you lose."
 config/version="0.1.0"
 run/main_scene="uid://d1sc0wytaschl"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
@@ -59,8 +63,8 @@ game=""
 
 [gui]
 
-theme/custom_font="res://assets/fonts/november/novem___.ttf"
 theme/default_font_antialiasing=0
+theme/custom_font="res://assets/fonts/november/novem___.ttf"
 
 [input]
 

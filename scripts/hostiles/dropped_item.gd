@@ -9,7 +9,7 @@ class_name DroppedItem
 var active: bool = false
 var remaining_duration: float = 0.0
 var ignore_collisions: bool = false
-var lying_on_ground: bool = true
+var lying_on_ground: bool = false
 
 var life_time: float = 15.0
 var is_blinking: bool = false
@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		life_time -= delta
 	if life_time <= 0:
 		queue_free()
-	if life_time <= 5:
+	if life_time <= 5 and not is_blinking:
 		is_blinking = true
 		_blink_down()
 	if active:
@@ -55,7 +55,6 @@ func _blink_down() -> void:
 func _blink_up() -> void:
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
-	print("blink up")
 	tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
 	await tween.finished
 	_blink_down()
